@@ -7,15 +7,25 @@
       class="login-card overflow-hidden"
     >
       <v-row no-gutters>
-        <!-- Left Column: Login / Create Account + Google Sign-In -->
+        <!-- Left Column: Brand Logo + Login / Create Account + Google Sign-In -->
         <v-col
           cols="12"
           md="6"
           class="bg-white pa-8 pa-sm-10 d-flex flex-column justify-center"
         >
           <div class="text-center mb-5">
-            <h1 class="text-h4 font-weight-bold text-grey-darken-4">
-              {{ isRegisterMode ? 'Create Account' : 'Login' }}
+            <div
+              v-if="!isRegisterMode"
+              class="d-inline-flex align-center justify-center ga-2"
+            >
+              <v-icon icon="mdi-palette-swatch" size="34" color="#2f49eb" />
+              <h1 class="text-h4 font-weight-bold text-grey-darken-4">
+                Fabric Studio
+              </h1>
+            </div>
+
+            <h1 v-else class="text-h4 font-weight-bold text-grey-darken-4">
+              Create Account
             </h1>
           </div>
 
