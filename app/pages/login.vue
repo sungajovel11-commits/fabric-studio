@@ -197,12 +197,6 @@
             </template>
           </div>
 
-          <div class="d-flex align-center my-2">
-            <v-divider />
-            <span class="text-caption text-medium-emphasis px-3">OR</span>
-            <v-divider />
-          </div>
-
           <!-- Official Google Sign-In Button -->
           <div
             v-show="!isRegisterMode"
