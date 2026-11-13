@@ -83,9 +83,6 @@
         <div class="text-subtitle-1 font-weight-bold text-grey-darken-2">
           No saved canvas designs yet
         </div>
-        <p class="text-body-2 text-medium-emphasis mb-4">
-          Click "Create Blank Canvas" to start designing, then click Save inside the editor to see it here.
-        </p>
         <v-btn
           color="#2f49eb"
           class="text-white text-none"
