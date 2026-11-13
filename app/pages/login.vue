@@ -49,7 +49,7 @@
               </label>
               <v-text-field
                 v-model="emailInput"
-                placeholder="sample@.com"
+                placeholder="sample@email.com"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
@@ -60,19 +60,9 @@
             </div>
 
             <div class="mb-2">
-              <div class="d-flex justify-space-between align-center mb-1">
-                <label class="text-caption text-grey-darken-1">
-                  Password
-                </label>
-                <a
-                  href="#"
-                  class="text-caption text-decoration-none font-weight-medium"
-                  style="color: #2f49eb;"
-                  @click.prevent="toggleMode(true)"
-                >
-                  Create new account?
-                </a>
-              </div>
+              <label class="text-caption text-grey-darken-1 d-block mb-1">
+                Password
+              </label>
               <v-text-field
                 v-model="passwordInput"
                 :type="showPassword ? 'text' : 'password'"
