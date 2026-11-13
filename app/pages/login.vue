@@ -120,7 +120,6 @@
               </label>
               <v-text-field
                 v-model="regName"
-                placeholder="Juan Dela Cruz"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
@@ -137,7 +136,6 @@
               <v-text-field
                 v-model="regEmail"
                 type="email"
-                placeholder="student@snc.edu.ph"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
@@ -154,7 +152,6 @@
               <v-text-field
                 v-model="regPassword"
                 :type="showPassword ? 'text' : 'password'"
-                placeholder="Minimum 4 characters"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
