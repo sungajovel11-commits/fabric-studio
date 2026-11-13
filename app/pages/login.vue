@@ -373,11 +373,21 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { definePageMeta, useRuntimeConfig, navigateTo } from '#imports'
+import { definePageMeta, useRuntimeConfig, navigateTo, useHead } from '#imports'
 import { useAuth } from '~/composables/useAuth'
 
 definePageMeta({
   middleware: 'auth',
+})
+
+useHead({
+  script: [
+    {
+      src: 'https://accounts.google.com/gsi/client?hl=en',
+      async: true,
+      defer: true,
+    },
+  ],
 })
 
 const config = useRuntimeConfig()
@@ -488,6 +498,7 @@ const initializeGoogleSignIn = () => {
       width: 320,
       text: 'signin_with',
       shape: 'rectangular',
+      locale: 'en',
     })
   } else {
     setTimeout(initializeGoogleSignIn, 250)
