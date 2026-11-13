@@ -7,7 +7,7 @@
       class="login-card overflow-hidden"
     >
       <v-row no-gutters>
-        <!-- Left Column: Brand Logo + Login / Create Account + Google Sign-In -->
+        <!-- Left Column: Fabric Studio Logo + Login / Create Account + Google Sign-In -->
         <v-col
           cols="12"
           md="6"
@@ -59,7 +59,7 @@
               </label>
               <v-text-field
                 v-model="emailInput"
-                placeholder="sample@email.com"
+                placeholder="sample@.com"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
@@ -112,7 +112,7 @@
             </v-btn>
           </form>
 
-          <!-- CREATE ACCOUNT FORM (No sample placeholders) -->
+          <!-- CREATE ACCOUNT FORM -->
           <form v-else @submit.prevent="handleRegister">
             <div class="mb-3">
               <label class="text-caption text-grey-darken-1 d-block mb-1">
@@ -205,6 +205,13 @@
                 Login
               </a>
             </template>
+          </div>
+
+          <!-- OR Divider -->
+          <div v-show="!isRegisterMode" class="d-flex align-center my-2">
+            <v-divider />
+            <span class="text-caption text-medium-emphasis px-3">OR</span>
+            <v-divider />
           </div>
 
           <!-- Official Google Sign-In Button -->
@@ -462,11 +469,9 @@ const handleCredentialResponse = (response: any) => {
 }
 
 const initializeGoogleSignIn = () => {
-  const clientId = config.public.googleClientId
-  if (!clientId) {
-    loadingScript.value = false
-    return
-  }
+  const clientId =
+    (config.public.googleClientId as string) ||
+    '100372389745-jbv57048ov3uar8j245p9q02qq169eeq.apps.googleusercontent.com'
 
   const g = (window as any).google
   if (g?.accounts?.id && googleBtnRef.value) {
