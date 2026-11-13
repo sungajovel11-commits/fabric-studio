@@ -49,7 +49,7 @@
               </label>
               <v-text-field
                 v-model="emailInput"
-                placeholder="sample@email.com"
+                placeholder="sample@.com"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
@@ -112,7 +112,7 @@
             </v-btn>
           </form>
 
-          <!-- CREATE ACCOUNT FORM -->
+          <!-- CREATE ACCOUNT FORM (No sample placeholders) -->
           <form v-else @submit.prevent="handleRegister">
             <div class="mb-3">
               <label class="text-caption text-grey-darken-1 d-block mb-1">
@@ -208,6 +208,8 @@
           </div>
 
           <div class="d-flex align-center my-2">
+            <v-divider />
+            <span class="text-caption text-medium-emphasis px-3">OR</span>
             <v-divider />
           </div>
 
@@ -369,6 +371,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { definePageMeta, useRuntimeConfig, navigateTo } from '#imports'
 import { useAuth } from '~/composables/useAuth'
 
 definePageMeta({
