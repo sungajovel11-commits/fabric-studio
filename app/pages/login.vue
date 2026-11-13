@@ -49,7 +49,7 @@
               </label>
               <v-text-field
                 v-model="emailInput"
-                placeholder="student@snc.edu.ph"
+                placeholder="sample@email.com"
                 variant="solo-filled"
                 flat
                 bg-color="#eef0f4"
