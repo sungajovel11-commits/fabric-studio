@@ -1,7 +1,7 @@
 {
-  "name": "nuxt-fabric-exam",
-  "private": true,
+  "name": "nuxt_fabric",
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -10,14 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "fabric": "^6.6.1",
-    "nuxt": "^4.0.0",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "fabric": "^7.4.0",
+    "nuxt": "^4.6.4",
+    "vue": "^3.5.45",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
-    "vuetify": "^4.0.0",
-    "vuetify-nuxt-module": "^0.19.0"
+    "vuetify": "^4.3.3",
+    "vuetify-nuxt-module": "^1.0.0-rc.6"
   }
 }
