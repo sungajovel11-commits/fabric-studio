@@ -3,7 +3,7 @@
     <v-app-bar
       v-if="route.path !== '/login'"
       color="#1976d2"
-      dark
+      theme="dark"
       elevation="1"
     >
       <v-app-bar-title class="font-weight-bold">
@@ -11,8 +11,8 @@
           to="/"
           class="d-inline-flex align-center ga-2 text-white text-decoration-none"
         >
-          <v-icon icon="mdi-palette-swatch" size="26" />
-          <span>Fabric Studio</span>
+          <v-icon icon="mdi-palette-swatch" size="26" color="white" />
+          <span class="text-white">Fabric Studio</span>
         </NuxtLink>
       </v-app-bar-title>
 
@@ -21,7 +21,7 @@
       <div class="d-flex align-center ga-2 pr-3">
         <v-btn
           :variant="route.path === '/' ? 'tonal' : 'text'"
-          class="text-none"
+          class="text-none text-white"
           prepend-icon="mdi-view-dashboard-outline"
           @click="navigateTo('/')"
         >
@@ -30,7 +30,7 @@
 
         <v-btn
           :variant="route.path === '/canvas-editor' ? 'tonal' : 'text'"
-          class="text-none"
+          class="text-none text-white"
           prepend-icon="mdi-vector-square"
           @click="navigateTo('/canvas-editor')"
         >
@@ -38,8 +38,18 @@
         </v-btn>
 
         <v-btn
+          :variant="route.path === '/profile' ? 'tonal' : 'text'"
+          class="text-none text-white"
+          prepend-icon="mdi-account-circle-outline"
+          @click="navigateTo('/profile')"
+        >
+          Profile
+        </v-btn>
+
+        <v-btn
           variant="outlined"
-          class="text-none"
+          color="white"
+          class="text-none text-white"
           prepend-icon="mdi-logout"
           @click="handleLogout"
         >
