@@ -235,16 +235,16 @@
         <v-col
           cols="12"
           md="6"
-          class="right-panel pa-8 pa-sm-10 d-flex flex-column align-center justify-center text-center"
+          class="right-panel pa-8 pa-sm-10 d-flex flex-column align-center justify-center text-center overflow-hidden"
         >
           <v-window v-model="currentSlide" class="w-100">
             <!-- SLIDE 1 -->
             <v-window-item :value="0">
-              <div class="d-flex flex-column align-center">
+              <div class="slide-box mx-auto d-flex flex-column align-center">
                 <svg
                   viewBox="0 0 320 220"
-                  width="265"
-                  height="185"
+                  width="250"
+                  height="175"
                   xmlns="http://www.w3.org/2000/svg"
                   class="mb-4"
                 >
@@ -280,7 +280,7 @@
                 <h2 class="text-h6 font-weight-bold text-grey-darken-4 mb-2">
                   Check Your Canvas Progress
                 </h2>
-                <p class="text-body-2 text-medium-emphasis px-4 mb-6">
+                <p class="text-body-2 text-medium-emphasis px-2 mb-6">
                   Create rectangles, circles, triangles, and custom text layers directly on an interactive HTML5 canvas.
                 </p>
               </div>
@@ -288,11 +288,11 @@
 
             <!-- SLIDE 2 -->
             <v-window-item :value="1">
-              <div class="d-flex flex-column align-center">
+              <div class="slide-box mx-auto d-flex flex-column align-center">
                 <svg
                   viewBox="0 0 320 220"
-                  width="265"
-                  height="185"
+                  width="250"
+                  height="175"
                   xmlns="http://www.w3.org/2000/svg"
                   class="mb-4"
                 >
@@ -317,7 +317,7 @@
                 <h2 class="text-h6 font-weight-bold text-grey-darken-4 mb-2">
                   Drag, Resize &amp; Recolor Live
                 </h2>
-                <p class="text-body-2 text-medium-emphasis px-4 mb-6">
+                <p class="text-body-2 text-medium-emphasis px-2 mb-6">
                   Select any object to move, scale, rotate, or inspect real-time X/Y coordinates and dimensions.
                 </p>
               </div>
@@ -325,11 +325,11 @@
 
             <!-- SLIDE 3 -->
             <v-window-item :value="2">
-              <div class="d-flex flex-column align-center">
+              <div class="slide-box mx-auto d-flex flex-column align-center">
                 <svg
                   viewBox="0 0 320 220"
-                  width="265"
-                  height="185"
+                  width="250"
+                  height="175"
                   xmlns="http://www.w3.org/2000/svg"
                   class="mb-4"
                 >
@@ -346,7 +346,7 @@
                 <h2 class="text-h6 font-weight-bold text-grey-darken-4 mb-2">
                   One-Click High-Res Export
                 </h2>
-                <p class="text-body-2 text-medium-emphasis px-4 mb-6">
+                <p class="text-body-2 text-medium-emphasis px-2 mb-6">
                   Download your finished vector artwork as a crisp PNG image straight from your browser.
                 </p>
               </div>
@@ -391,7 +391,7 @@ useHead({
 })
 
 const config = useRuntimeConfig()
-const { registerAccount, loginWithEmail, loginWithCredential } = useAuth()
+const { user, initAuth, registerAccount, loginWithEmail, loginWithCredential } = useAuth()
 
 const isRegisterMode = ref(false)
 const emailInput = ref('')
@@ -486,6 +486,8 @@ const initializeGoogleSignIn = () => {
   const g = (window as any).google
   if (g?.accounts?.id && googleBtnRef.value) {
     loadingScript.value = false
+    googleBtnRef.value.innerHTML = ''
+
     g.accounts.id.initialize({
       client_id: clientId,
       callback: handleCredentialResponse,
@@ -506,6 +508,12 @@ const initializeGoogleSignIn = () => {
 }
 
 onMounted(() => {
+  initAuth()
+  if (user.value) {
+    navigateTo('/')
+    return
+  }
+
   initializeGoogleSignIn()
   slideTimer = setInterval(() => {
     currentSlide.value = (currentSlide.value + 1) % 3
@@ -536,6 +544,11 @@ onBeforeUnmount(() => {
 
 .right-panel {
   background-color: #f3f5f9;
+}
+
+.slide-box {
+  max-width: 340px;
+  width: 100%;
 }
 
 .indicator-btn {
