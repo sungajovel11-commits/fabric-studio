@@ -1,3 +1,4 @@
+import { defineNuxtRouteMiddleware, navigateTo } from '#imports'
 import { useAuth } from '~/composables/useAuth'
 
 export default defineNuxtRouteMiddleware((to) => {
@@ -6,13 +7,11 @@ export default defineNuxtRouteMiddleware((to) => {
   const { user, initAuth } = useAuth()
   initAuth()
 
-  const isAuthenticated = Boolean(user.value)
-
-  if (!isAuthenticated && to.path !== '/login') {
+  if (!user.value && to.path !== '/login') {
     return navigateTo('/login')
   }
 
-  if (isAuthenticated && to.path === '/login') {
+  if (user.value && to.path === '/login') {
     return navigateTo('/')
   }
 })
