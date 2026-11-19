@@ -7,7 +7,10 @@
       elevation="1"
     >
       <v-app-bar-title class="font-weight-bold">
-        <div class="d-inline-flex align-center ga-2">
+        <div
+          class="d-inline-flex align-center ga-2 cursor-pointer"
+          @click="navigateTo('/')"
+        >
           <v-icon icon="mdi-palette-swatch" size="26" />
           <span>Fabric Studio</span>
         </div>
@@ -17,7 +20,7 @@
 
       <div class="d-flex align-center ga-2 pr-3">
         <v-btn
-          variant="tonal"
+          :variant="route.path === '/' ? 'tonal' : 'text'"
           class="text-none"
           prepend-icon="mdi-view-dashboard-outline"
           @click="navigateTo('/')"
@@ -26,7 +29,7 @@
         </v-btn>
 
         <v-btn
-          variant="text"
+          :variant="route.path === '/canvas-editor' ? 'tonal' : 'text'"
           class="text-none"
           prepend-icon="mdi-vector-square"
           @click="navigateTo('/canvas-editor')"
@@ -34,14 +37,20 @@
           Canvas Editor
         </v-btn>
 
-        <v-avatar
-          v-if="user?.email"
-          color="white"
-          size="32"
-          class="text-primary font-weight-bold"
+        <v-btn
+          :variant="route.path === '/profile' ? 'tonal' : 'text'"
+          class="text-none px-2"
+          @click="navigateTo('/profile')"
         >
-          {{ user.email.charAt(0).toUpperCase() }}
-        </v-avatar>
+          <v-avatar
+            color="white"
+            size="30"
+            class="text-primary font-weight-bold mr-2"
+          >
+            {{ userInitial }}
+          </v-avatar>
+          <span>Profile</span>
+        </v-btn>
 
         <v-btn
           variant="outlined"
@@ -61,12 +70,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute, navigateTo } from '#imports'
 import { useAuth } from '~/composables/useAuth'
 
 const route = useRoute()
 const { user, initAuth, logout } = useAuth()
+
+const userInitial = computed(() => {
+  const label = user.value?.name || user.value?.email || 'U'
+  return label.charAt(0).toUpperCase()
+})
 
 const handleLogout = () => {
   logout()
