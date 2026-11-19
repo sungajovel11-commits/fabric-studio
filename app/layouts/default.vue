@@ -7,50 +7,49 @@
       elevation="1"
     >
       <v-app-bar-title class="font-weight-bold">
-        <div
-          class="d-inline-flex align-center ga-2 cursor-pointer"
-          @click="navigateTo('/')"
+        <NuxtLink
+          to="/"
+          class="d-inline-flex align-center ga-2 text-white text-decoration-none"
         >
           <v-icon icon="mdi-palette-swatch" size="26" />
           <span>Fabric Studio</span>
-        </div>
+        </NuxtLink>
       </v-app-bar-title>
 
       <v-spacer />
 
       <div class="d-flex align-center ga-2 pr-3">
         <v-btn
+          to="/"
           :variant="route.path === '/' ? 'tonal' : 'text'"
           class="text-none"
           prepend-icon="mdi-view-dashboard-outline"
-          @click="navigateTo('/')"
         >
           Dashboard
         </v-btn>
 
         <v-btn
+          to="/canvas-editor"
           :variant="route.path === '/canvas-editor' ? 'tonal' : 'text'"
           class="text-none"
           prepend-icon="mdi-vector-square"
-          @click="navigateTo('/canvas-editor')"
         >
           Canvas Editor
         </v-btn>
 
-        <v-btn
-          :variant="route.path === '/profile' ? 'tonal' : 'text'"
-          class="text-none px-2"
-          @click="navigateTo('/profile')"
+        <NuxtLink
+          to="/profile"
+          title="Profile Settings"
+          class="d-inline-flex align-center text-decoration-none cursor-pointer"
         >
           <v-avatar
             color="white"
-            size="30"
-            class="text-primary font-weight-bold mr-2"
+            size="34"
+            class="text-primary font-weight-bold"
           >
             {{ userInitial }}
           </v-avatar>
-          <span>Profile</span>
-        </v-btn>
+        </NuxtLink>
 
         <v-btn
           variant="outlined"
