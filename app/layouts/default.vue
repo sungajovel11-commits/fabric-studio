@@ -20,36 +20,22 @@
 
       <div class="d-flex align-center ga-2 pr-3">
         <v-btn
-          to="/"
           :variant="route.path === '/' ? 'tonal' : 'text'"
           class="text-none"
           prepend-icon="mdi-view-dashboard-outline"
+          @click="navigateTo('/')"
         >
           Dashboard
         </v-btn>
 
         <v-btn
-          to="/canvas-editor"
           :variant="route.path === '/canvas-editor' ? 'tonal' : 'text'"
           class="text-none"
           prepend-icon="mdi-vector-square"
+          @click="navigateTo('/canvas-editor')"
         >
           Canvas Editor
         </v-btn>
-
-        <NuxtLink
-          to="/profile"
-          title="Profile Settings"
-          class="d-inline-flex align-center text-decoration-none cursor-pointer"
-        >
-          <v-avatar
-            color="white"
-            size="34"
-            class="text-primary font-weight-bold"
-          >
-            {{ userInitial }}
-          </v-avatar>
-        </NuxtLink>
 
         <v-btn
           variant="outlined"
@@ -69,17 +55,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useRoute, navigateTo } from '#imports'
 import { useAuth } from '~/composables/useAuth'
 
 const route = useRoute()
-const { user, initAuth, logout } = useAuth()
-
-const userInitial = computed(() => {
-  const label = user.value?.name || user.value?.email || 'U'
-  return label.charAt(0).toUpperCase()
-})
+const { initAuth, logout } = useAuth()
 
 const handleLogout = () => {
   logout()
