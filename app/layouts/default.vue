@@ -1,66 +1,79 @@
 <template>
-  <div>
-    <v-app-bar v-if="user" color="primary" elevation="2">
+  <v-app>
+    <v-app-bar
+      v-if="route.path !== '/login'"
+      color="#1976d2"
+      dark
+      elevation="1"
+    >
       <v-app-bar-title class="font-weight-bold">
-        <NuxtLink
-          to="/"
-          class="d-inline-flex align-center text-white text-decoration-none"
-          style="cursor: pointer;"
-        >
-          <v-icon icon="mdi-palette-swatch" class="mr-2" />
+        <div class="d-inline-flex align-center ga-2">
+          <v-icon icon="mdi-palette-swatch" size="26" />
           <span>Fabric Studio</span>
-        </NuxtLink>
+        </div>
       </v-app-bar-title>
 
       <v-spacer />
 
-      <v-btn to="/" variant="text" prepend-icon="mdi-view-dashboard" class="mr-1">
-        Dashboard
-      </v-btn>
-      <v-btn
-        to="/canvas-editor"
-        variant="text"
-        prepend-icon="mdi-vector-square"
-        class="mr-2"
-      >
-        Canvas Editor
-      </v-btn>
+      <div class="d-flex align-center ga-2 pr-3">
+        <v-btn
+          variant="tonal"
+          class="text-none"
+          prepend-icon="mdi-view-dashboard-outline"
+          @click="navigateTo('/')"
+        >
+          Dashboard
+        </v-btn>
 
-      <!-- Clickable Profile Avatar -> /profile -->
-      <NuxtLink
-        to="/profile"
-        class="d-inline-flex align-center text-decoration-none mr-3"
-        title="Edit Profile"
-        style="cursor: pointer;"
-      >
-        <v-avatar size="36" color="white" class="elevation-1">
-          <v-img v-if="user.picture" :src="user.picture" :alt="user.name" cover />
-          <span v-else class="text-primary font-weight-bold text-caption">
-            {{ user.name?.charAt(0)?.toUpperCase() || 'U' }}
-          </span>
+        <v-btn
+          variant="text"
+          class="text-none"
+          prepend-icon="mdi-vector-square"
+          @click="navigateTo('/canvas-editor')"
+        >
+          Canvas Editor
+        </v-btn>
+
+        <v-avatar
+          v-if="user?.email"
+          color="white"
+          size="32"
+          class="text-primary font-weight-bold"
+        >
+          {{ user.email.charAt(0).toUpperCase() }}
         </v-avatar>
-      </NuxtLink>
 
-      <v-btn
-        color="white"
-        variant="outlined"
-        size="small"
-        prepend-icon="mdi-logout"
-        @click="logout"
-      >
-        Logout
-      </v-btn>
+        <v-btn
+          variant="outlined"
+          class="text-none"
+          prepend-icon="mdi-logout"
+          @click="handleLogout"
+        >
+          Logout
+        </v-btn>
+      </div>
     </v-app-bar>
 
-    <v-main class="bg-grey-lighten-4 min-h-screen">
+    <v-main>
       <slot />
     </v-main>
-  </div>
+  </v-app>
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRoute, navigateTo } from '#imports'
 import { useAuth } from '~/composables/useAuth'
 
+const route = useRoute()
 const { user, initAuth, logout } = useAuth()
-onMounted(() => initAuth())
+
+const handleLogout = () => {
+  logout()
+  navigateTo('/login')
+}
+
+onMounted(() => {
+  initAuth()
+})
 </script>
